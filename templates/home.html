@@ -1,0 +1,252 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5">
+    <!-- Framework Css -->
+    <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/lib/bootstrap.min.css">
+    <!-- Font Awesome / Icon Fonts -->
+    <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/lib/font-awesome.min.css">
+    <!-- Owl Carousel / Carousel- Slider -->
+    <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/lib/owl.carousel.min.css">
+    <!-- Animations -->
+    <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/lib/animations.min.css">
+    <!-- Style Theme -->
+    <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/style.css">
+    <!-- Responsive Theme -->
+    <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/responsive.css">
+    <script src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/js/lib/jquery.js"></script>
+    <script src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/js/lib/owl.carousel.min.js"></script>
+    	<!-- Google Tag Manager -->
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-MT6DCKQ');
+    </script>
+    <!-- End Google Tag Manager -->
+	 </head>
+<body data-rsssl=1>
+<div class="wrapper">
+    <!--===================== Header ========================-->
+    <header class="transparent" style="background-color:rgb(25, 142, 219)">
+        <div class="container" >
+            <div class="row" style="margin-bottom: 20px;">
+                <div class="col-md-2">
+                    <div class="logo"><a href="{% url 'home' %}"><img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/logo.svg" alt="logo"></a></div>
+                </div>
+                <div class="col-md-7">
+                    <ul class="menu">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="https://enginehosting-html.fruitfulcode.com/blog-list">FEED</a></li>
+                        <li><a href="https://enginehosting-html.fruitfulcode.com/contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                {% if user.is_authenticated %}  
+                <a href="{% url 'signup' %}" style="color: yellow; font-size: 25px; font-weight: bolder; margin-right: 30px;" class="title">{{request.user.username}}</a>
+
+            <div class="button-header">
+                <a class="custom-btn" href="javascript:{document.getElementById('logout').submit()}">Logout</a>
+                <form id="logout" method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <input type="hidden">
+                  </form>
+            </div>
+        </div>
+        {% else %}
+                <div class="col-md-3">
+                    <div class="button-header">
+                        <a href="{% url 'login' %}" class="custom-btn login">Login</a>
+                        <a href="{% url 'signup' %}" class="custom-btn">Sign Up</a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+
+
+ </header>
+
+ 
+</div>
+    <!--===================== End of Header ========================-->
+    <!--===================== Base Slider ========================-->
+    <div class="base-slider">
+        <div class="item">
+            <img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/bg-test.png" alt="slider">
+            <div class="inside">
+                <h2>Best social media Platform</h2>
+                <p>Get connected to more people</p>
+                <a href="{% url 'login' %}" class="custom-btn">Get Started Now</a>
+            </div><!--inside-->
+        </div>
+    </div>
+    <!--===================== End of Base Slider ========================-->
+    <section class="bg-gray">
+        <div class="container">
+            <!--===================== Why Choose ========================-->
+            <div class="why-choose animatedParent">
+                <h2 class="title-head">Why you should choose us</h2>
+                <div class="row">
+                    <div class="col-md-4 col-xs-12 animated bounceInUp delay-250">
+                        <div class="inside">
+                            <img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/optimised.svg" alt="optimised">
+                            <a href="https://enginehosting-html.fruitfulcode.com/blog-list">Totaly Optimised</a>
+                            <p>Our wordpress theme is totaly optimised for you needs. Very fast and responsive website convert your traffic to new customers.</p>
+                            <a href="https://enginehosting-html.fruitfulcode.com/blog-list" class="read-more">Learn More <img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/right.png" alt="right"></a>
+                        </div><!--inside-->
+                    </div>
+                    <div class="col-md-4 col-xs-12 animated bounceInUp delay-500">
+                        <div class="inside">
+                            <img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/powerfull.svg" alt="powerfull">
+                            <a href="https://enginehosting-html.fruitfulcode.com/blog-list">Powerful Features</a>
+                            <p>Our theme get everything you need to work with your hosting website. Its fresh, brandly new and with awesome customizing features. </p>
+                            <a href="https://enginehosting-html.fruitfulcode.com/blog-list" class="read-more">Learn More <img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/right.png" alt="right"></a>
+                        </div><!--inside-->
+                    </div>
+                    <div class="col-md-4 col-xs-12 animated bounceInUp delay-750">
+                        <div class="inside">
+                            <img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/website.svg" alt="website">
+                            <a href="https://enginehosting-html.fruitfulcode.com/blog-list">Worldwide Support</a>
+                            <p>We will do suppor to your theme almost 24/7. If you get some bugs or have some problems - just simply write to us. </p>
+                            <a href="https://enginehosting-html.fruitfulcode.com/blog-list" class="read-more">Learn More <img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/right.png" alt="right"></a>
+                        </div><!--inside-->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    {% block content %}
+
+
+    {% endblock %}
+    <!--===================== Pricing Table ========================-->
+    <div class="pricing-table animatedParent">
+        <div class="container">
+            <h2 class="title-head">Linux Reseller Hosting</h2>
+            <p>High Performance cPanel WHM Reseller Hosting in Europe</p>
+            <ul class="pricing-list">
+                <li class="animated bounceInLeft delay-250">
+                    <div class="images"><img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/server.svg" alt="server"></div>
+                    <h5>Dedicated Server</h5>
+                    <p>There are many variations of passages of Lorem Ipsum available.</p>
+                    <span><b>From</b></span>
+                    <div class="price">80$<span>/month</span></div>
+                    <a href="https://enginehosting-html.fruitfulcode.com/service-page" class="custom-btn">Get Started Now</a>
+                </li>
+                <li class="animated bounceInLeft delay-500">
+                    <div class="images"><img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/hosting.svg" alt="hosting"></div>
+                    <h5>Reseller Hosting</h5>
+                    <p>There are many variations of passages of Lorem Ipsum available.</p>
+                    <span><b>From</b></span>
+                    <div class="price">160$<span>/month</span></div>
+                    <a href="https://enginehosting-html.fruitfulcode.com/service-page" class="custom-btn">Get Started Now</a>
+                </li>
+                <li class="animated bounceInLeft delay-750">
+                    <div class="images"><img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/hosting2.svg" alt="hosting2"></div>
+                    <h5>Shared Hosting</h5>
+                    <p>There are many variations of passages of Lorem Ipsum available.</p>
+                    <span><b>From</b></span>
+                    <div class="price">9$<span>/month</span></div>
+                    <a href="https://enginehosting-html.fruitfulcode.com/service-page" class="custom-btn">Get Started Now</a>
+                </li>
+                <li class="animated bounceInLeft delay-1000">
+                    <div class="images"><img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/vps.svg" alt="vpn"></div>
+                    <h5>VPS Hosting</h5>
+                    <p>There are many variations of passages of Lorem Ipsum available.</p>
+                    <span><b>From</b></span>
+                    <div class="price">82$<span>/month</span></div>
+                    <a href="https://enginehosting-html.fruitfulcode.com/service-page" class="custom-btn">Get Started Now</a>
+                </li>
+            </ul><!--pricing-list-->
+          
+        </div>
+    </div>
+   
+    <div class="user-slider">
+        <div class="container">
+            <div class="slider owl-carousel owl-theme">
+                <div class="item">
+                    <div class="inside">
+                        <img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/icon.svg" class="icon" alt="icon">
+                        <img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/logo-tesla.png" alt="logo-tesla">
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</p>
+                        <div class="user">
+                            <a href="#">
+                                <img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/user.png" alt="user">
+                                Oliver Mitchell
+                                <span>Manager at Lorem ipsum</span>
+                            </a>
+                        </div><!--user-->
+                    </div><!--inside-->
+                </div>
+                <div class="item">
+                    <div class="inside">
+                        <img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/icon.svg" class="icon" alt="icon">
+                        <img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/logo-tesla.png" alt="logo-tesla">
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</p>
+                        <div class="user">
+                            <a href="#">
+                                <img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/user.png" alt="user">
+                                Oliver Mitchell
+                                <span>Manager at Lorem ipsum</span>
+                            </a>
+                        </div><!--user-->
+                    </div><!--inside-->
+                </div>
+            </div><!--slider-->
+        </div>
+    </div>
+    <!--===================== End of User Slider ========================-->
+    
+    <footer>
+        <div class="container">
+            <div class="widget-footer">
+                <h4>Product</h4>
+                <ul>
+				<li><a href="https://enginehosting-html.fruitfulcode.com/service-page">Web Hosting</a></li>
+				<li><a href="https://enginehosting-html.fruitfulcode.com/service-page">Shared Hosting</a></li>
+				<li><a href="https://enginehosting-html.fruitfulcode.com/service-page">Dedicated Server</a></li>
+				<li><a href="https://enginehosting-html.fruitfulcode.com/service-page">Private Cloud</a></li>
+                </ul>
+            </div><!--widget-footer-->
+            <div class="widget-footer">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="https://enginehosting-html.fruitfulcode.com/blog-list">Blog</a></li>
+                    <li><a href="https://enginehosting-html.fruitfulcode.com/contact">Contact</a></li>
+                </ul>
+            </div><!--widget-footer-->
+   
+            <div class="widget-footer">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li><a href="#">7830101805</a></li>
+                    <li><a href="#">sweepingseven.com.com</a></li>
+                </ul>
+            </div><!--widget-footer-->
+            
+            
+        </div>
+    </footer>
+</div><!--wrapper-->
+<script src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/js/lib/bootstrap.min.js"></script>
+<script src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/js/lib/css3-animate-it.js"></script>
+<script src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/js/lib/counter.js"></script>
+<script src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/js/main.js"></script>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MT6DCKQ"
+                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Start of fruitfulcode Zendesk Widget script -->
+    <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=d528a83e-80fd-473c-b1a7-66bc4a26548d"> </script>
+    <!-- End of fruitfulcode Zendesk Widget script -->
+
+    </body>
+</html>

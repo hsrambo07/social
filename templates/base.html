@@ -1,0 +1,86 @@
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/main.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/color.css">
+    <link rel="stylesheet" href="/static/css/responsive.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5">
+    <!-- Framework Css -->
+    <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/lib/bootstrap.min.css">
+    <!-- Font Awesome / Icon Fonts -->
+    <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/lib/font-awesome.min.css">
+    <!-- Owl Carousel / Carousel- Slider -->
+    <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/lib/owl.carousel.min.css">
+    <!-- Animations -->
+    <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/lib/animations.min.css">
+    <!-- Style Theme -->
+    <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/style.css">
+    <!-- Responsive Theme -->
+    <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/responsive.css">
+    <script src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/js/lib/jquery.js"></script>
+    <script src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/js/lib/owl.carousel.min.js"></script>
+    	<!-- Google Tag Manager -->
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-MT6DCKQ');
+    </script>
+    <!-- End Google Tag Manager -->
+	 </head>
+<body data-rsssl=1>
+<div class="wrapper">
+    <!--===================== Header ========================-->
+    <header class="transparent" style="background-color:rgb(25, 142, 219)">
+        <div class="container" >
+            <div class="row" style="margin-bottom: 20px;">
+                <div class="col-md-2">
+                    <div class="logo"><a href="{% url 'home' %}"><img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/logo.svg" alt="logo"></a></div>
+                </div>
+                <div class="col-md-7">
+                    <ul class="menu">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="https://enginehosting-html.fruitfulcode.com/blog-list">FEED</a></li>
+                        <li><a href="https://enginehosting-html.fruitfulcode.com/contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                {% if user.is_authenticated %}  
+     
+                <div class="button-header">
+                    <a class="custom-btn" href="javascript:{document.getElementById('logout').submit()}">Logout</a>
+                    <form id="logout" method="POST" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <input type="hidden">
+                      </form>
+                </div>
+            </div>
+            {% else %}
+                <div class="col-md-3">
+                    <div class="button-header">
+                        <a href="{% url 'login' %}" class="custom-btn login">Login</a>
+                        <a href="{% url 'signup' %}" class="custom-btn">Sign Up</a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+
+
+ </header>
+
+ 
+</div>
+<br<br><br><br><br><br><br><br><br><br>>
+<div style="display: block;">
+    {% block content %}
+
+    {% endblock %}
+</div>
+</body>
+</html>       
