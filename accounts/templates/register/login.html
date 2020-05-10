@@ -1,0 +1,82 @@
+<html lang="en">
+
+<head>
+    {% load static %}
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <title>Django Social Network | Login</title>
+
+    <link rel="stylesheet" href="/static/css/main.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/color.css">
+    <link rel="stylesheet" href="/static/css/responsive.css">
+
+</head>
+<body>
+    <div class="theme-layout">
+        <div class="container-fluid pdng0">
+            <div class="row merged">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="land-featurearea" style="background-color: rgb(19, 131, 235);">
+                        <div class="land-meta">
+                            <h1>Telefly</h1>
+                            <p>
+                                Register with us, and  meet with new people.......
+                            </p>
+                            <div class="friend-logo">
+                                <span><a href="{% url 'home' %}" style="margin-left: 9px; padding-bottom: 20px; margin-bottom: 60px;"><img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/logo.svg" alt="logo" style="margin-left: 9px; padding-bottom: 20px; margin-bottom: 60px;"></a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="login-reg-bg">
+                    <div class="log-reg-area sign">
+                        <h2 class="log-title">Login</h2>
+                        <p>
+                            Welcome to my social media website</a>
+                        </p>
+                        {% if error %}
+                        <p style="color: red;">*{{error}}</p>
+                        
+                        {% endif %}
+                        <form method="post" action="{% url 'login' %}">
+                            {% csrf_token %}
+
+                            <div class="form-group">
+                                
+                                <input type="text" id="input" name="username" required="required"/>
+                                <label class="control-label" for="input">Username</label><i class="mtrl-select"></i>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password" required="required"/>
+                                <label class="control-label" for="input">Password</label><i class="mtrl-select"></i>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" checked="checked"/><i class="check-box"></i>Always Remember
+                                    Me.
+                                </label>
+                            </div>
+                            <a href="{% url 'password_reset' %}" title="" class="forgot-pwd">Forgot Password?</a>
+                            <div class="submit-btns">
+                                <button class="mtr-btn signin" type="submit"><span>Login</span></button>
+                                <a class="mtr-btn signup" href="{% url 'signup' %}"><span>Register</span>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/main.min.js"></script>
+<script src="js/script.js"></script>
+
+</body>
+</html>

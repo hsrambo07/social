@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 
+from django.db.models.signals import post_save
+
 class Profile(models.Model):
     image=models.ImageField(upload_to='images/')
     user=models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
@@ -10,13 +12,12 @@ class Profile(models.Model):
     bio=models.TextField()
     url=models.TextField()
 
+    def __str__(self):
+        return self.user.username
 
-def __str__(self):
-    return self.title
+def create_profile(sender, **kwargs):
+    if kwargs['created']:
+        user_profile = UserProfile.objects.create(user=kwargs['instance'])
 
+post_save.connect(create_profile, sender=User)
 
-def pub_date_pretty(self):
-    return self.pub_date.strftime('%b  %e  %y')
-
-def summary(self):
-    return self.body[:100]
