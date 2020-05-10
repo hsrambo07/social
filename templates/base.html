@@ -1,12 +1,7 @@
 <html lang="en">
 <head>
-    {% load static %}
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="/static/css/main.min.css">
-    <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="stylesheet" href="/static/css/color.css">
-    <link rel="stylesheet" href="/static/css/responsive.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5">
     <!-- Framework Css -->
     <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/lib/bootstrap.min.css">
@@ -50,16 +45,19 @@
                     </ul>
                 </div>
                 {% if user.is_authenticated %}  
-     
-                <div class="button-header">
-                    <a class="custom-btn" href="javascript:{document.getElementById('logout').submit()}">Logout</a>
-                    <form id="logout" method="POST" action="{% url 'logout' %}">
-                        {% csrf_token %}
-                        <input type="hidden">
-                      </form>
-                </div>
+                <a href="{% url 'signup' %}" style="color: yellow; font-size: 25px; font-weight: bolder; margin-right: 30px;" class="title">{{request.user.username}}</a>
+
+                <li><a href="{% url 'change_password' %}">Change_Password</a></li>
+
+            <div class="button-header">
+                <a class="custom-btn" href="javascript:{document.getElementById('logout').submit()}">Logout</a>
+                <form id="logout" method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <input type="hidden">
+                  </form>
             </div>
-            {% else %}
+        </div>
+        {% else %}
                 <div class="col-md-3">
                     <div class="button-header">
                         <a href="{% url 'login' %}" class="custom-btn login">Login</a>
@@ -75,8 +73,9 @@
  </header>
 
  
+ 
 </div>
-<br<br><br><br><br><br><br><br><br><br>>
+<br<br><br><br><br><br><br><br><br><br>
 <div style="display: block;">
     {% block content %}
 

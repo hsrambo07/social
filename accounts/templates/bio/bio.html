@@ -1,0 +1,43 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+
+<form class="form-signin" method="POST" action="{% url 'bio' %}"  enctype="multipart/form-data">
+  <img class="mb-4" src="https://cdn.worldvectorlogo.com/logos/product-hunt.svg" alt="" style="text-align: center; left: 100px;" width="72" height="72">
+  <h1 class="h3 mb-3 font-weight-normal">Enter Details About yourself</h1>
+  {% if error %}
+<h4  style="color: red; text-align: center;" >{{error}}</h4>
+<br>
+{% endif %}
+  {% csrf_token %}
+  <label class="sr-only">First Name</label>
+  <input type="text" class="form-control" name="name" placeholder="First name" required autofocus>
+        <br>
+        <label class="sr-only">Last Name</label>
+        <input type="text" class="form-control" name="last_name" placeholder="Last name" required autofocus>
+              <br>
+        <label  class="sr-only">Bio</label>
+  <input type="textbox" name="bio" class="form-control" placeholder="Details about yourself" required>
+<br>
+
+
+
+  <label  class="sr-only">Link to your website</label>
+  <input type="text" name="url" class="form-control" placeholder="URL" notrequired>
+<br>
+
+
+  <label  class="sr-only">your image
+  </label>
+  <input type="file" name="image" class="form-control">
+
+
+  
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Add details</button>
+
+</form>
+
+{% endblock %}
+
+

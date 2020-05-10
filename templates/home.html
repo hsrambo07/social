@@ -47,6 +47,8 @@
                 {% if user.is_authenticated %}  
                 <a href="{% url 'signup' %}" style="color: yellow; font-size: 25px; font-weight: bolder; margin-right: 30px;" class="title">{{request.user.username}}</a>
 
+                <li><a href="{% url 'change_password' %}">Change_Password</a></li>
+
             <div class="button-header">
                 <a class="custom-btn" href="javascript:{document.getElementById('logout').submit()}">Logout</a>
                 <form id="logout" method="POST" action="{% url 'logout' %}">
