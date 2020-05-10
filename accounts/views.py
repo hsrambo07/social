@@ -99,9 +99,9 @@ def edit_profile(request):
 
 def view_profile(request, pk=None):
     if pk:
-        user = User.objects.get(pk=pk)
+        user = detailblog=get_object_or_404(Profile, pk=pk)
     else:
         user = request.user
-    args = {'user': user}
+    product = {'user': user}
     return render(request, 'accounts/profile.html', args)
 
