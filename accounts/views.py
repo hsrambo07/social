@@ -8,6 +8,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 from django.urls import reverse
+from django.views.generic import FormView
+from django.views.generic import UpdateView
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from accounts.forms import UpdateProfileForm,UserEditForm,ProfileEditForm
 
 
 
@@ -23,7 +28,11 @@ def signup(request):
                     return render(request,'register/signup.html',{'error':'Username has already been taken'})
 
                 except User.DoesNotExist:
-                    user= User.objects.create_user(request.POST['username'],password=request.POST['password1'],email=request.POST['email'])
+                    user= User.objects.create_user(username=request.POST['username'],password=request.POST['password1'],email=request.POST['email'])
+                  
+                    user.first_name =request.POST['first_name']
+                    user.last_name =request.POST['last_name']
+                    user.save()
                     auth.login(request,user)
                     return redirect('home')
             
@@ -34,7 +43,7 @@ def signup(request):
 
 def login(request):
     if request.method=='POST':
-        user=auth.authenticate(username=request.POST['username'],password=request.POST['password'])
+        user=auth.authenticate(username=request.POST['username'],password=request.POST['password1'])
         if user is not None:
             auth.login(request,user)
             return redirect('home')
@@ -73,35 +82,30 @@ def change_password(request):
 
 
 @login_required
-def edit_profile(request):
-    if request.method=='POST':
-        if request.POST['name']  and request.POST['last_name'] and request.POST['url'] and request.POST['bio'] and request.FILES['image']:
-            product=Profile()
-            product.name= request.POST['name']
+def edit(request):
+    if request.method == 'POST':
+        user_form=UserEditForm(instance=request.user,data=request.POST)
+        profile_form=ProfileEditForm(
+                                    instance=request.user.profile,
+                                    data=request.POST,
+                                    files=request.FILES)
 
-            product.last_name= request.POST['last_name']
-
-            product.bio= request.POST['bio']
-            if request.POST['url'].startswith('https://') or request.POST['url'].startswith('http://'):        
-                product.url= request.POST['url']   
-            else:
-                product.url= 'http://' + request.POST['url']     
-  
-            product.image= request.FILES['image']
-            product.save()
-            return redirect('home')
-        else:
-            return render(request,'accounts/edit_profile.html',{'error':'Hey,all fields are required'})     
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
     else:
-        return render(request,'accounts/edit_profile.html')
+        user_form=UserEditForm(instance=request.user)
+        profile_form=ProfileEditForm(instance=request.user.profile)
+    return render(request,'accounts/edit.html',{'user_form':user_form,'profile_form':profile_form})    
 
 
 
+@login_required
 def view_profile(request, pk=None):
     if pk:
-        user = detailblog=get_object_or_404(Profile, pk=pk)
+        users= get_object_or_404(Profile, pk=pk)
     else:
-        user = request.user
-    product = {'user': user}
-    return render(request, 'accounts/profile.html', args)
+        users = request.user
+    product = {'users': users,'name':request.user.first_name}
+    return render(request, 'accounts/profile.html', product)
 

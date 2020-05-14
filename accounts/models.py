@@ -5,19 +5,15 @@ from django.conf import settings
 from django.db.models.signals import post_save
 
 class Profile(models.Model):
-    image=models.ImageField(upload_to='images/')
     user=models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
-    name=models.CharField(max_length=200)
-    last_name=models.CharField(max_length=200)
+    image=models.ImageField(upload_to='images/',blank='True')
+
     bio=models.TextField()
     url=models.TextField()
-
+    #gender = models.IntegerField(choices=GENDER_CHOICES, default=1)
+    #phone= models.CharField(max_length=10, blank=True)
     def __str__(self):
         return self.user.username
 
-def create_profile(sender, **kwargs):
-    if kwargs['created']:
-        user_profile = UserProfile.objects.create(user=kwargs['instance'])
-
-post_save.connect(create_profile, sender=User)
-
+    def __unicode__(self):
+        return u"%s" % self.user.username

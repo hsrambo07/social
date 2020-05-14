@@ -44,6 +44,14 @@
                         <form method="post" action="{% url 'signup' %}">
                             {% csrf_token %}
                             <div class="form-group">
+                                <input type='text' required="required" name="first_name"/>
+                                <label class="control-label" for="input">First Name</label><i class="mtrl-select"></i>
+                            </div>
+                            <div class="form-group">
+                                <input type='text' required="required" name="last_name"/>
+                                <label class="control-label" for="input">Last Name</label><i class="mtrl-select"></i>
+                            </div>
+                            <div class="form-group">
                                 <input type='email' required="required" name="email"/>
                                 <label class="control-label" for="input">Email</label><i class="mtrl-select"></i>
                             </div>
