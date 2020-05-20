@@ -12,6 +12,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns=[
     path('create/',views.post_create,name='create'),
-    path('create/<int:id>/<slug:slug>/',views.post_detail,name='detail')
+    path('create/<int:id>/<slug:slug>/',views.post_detail,name='detail'),
+    path('like/',views.image_like,name='like'),
+    path('allfeeds/',views.allfeed,name='feed'),
 
 ]

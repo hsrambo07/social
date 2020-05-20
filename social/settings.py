@@ -13,7 +13,7 @@ SECRET_KEY = 'r*exkxvu_+gk003=s(9$j_zz4mz1tq8h=c8904m##g+=q+_0)r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['google-site-verification=Rt0EgqfQL3UirQO9H3VF7pdebdr-iv5vOf29cHrsPPA','0da1686b.ngrok.io','127.0.0.1','localhost']
+ALLOWED_HOSTS = ['google-site-verification=Rt0EgqfQL3UirQO9H3VF7pdebdr-iv5vOf29cHrsPPA','https://127.0.0.1:8000','127.0.0.1','localhost']
 
 
 # Application definition
@@ -21,6 +21,7 @@ ALLOWED_HOSTS = ['google-site-verification=Rt0EgqfQL3UirQO9H3VF7pdebdr-iv5vOf29c
 INSTALLED_APPS = [
     'feed.apps.FeedConfig',
     'social_django',
+    'sorl.thumbnail',
     'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,11 +53,6 @@ LOGIN_REDIRECT_URL = 'view_profile'
 
 
 
-AUTHENTICATION_BACKENDS=[
-    'social_core.backends.google.GoogleOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-    'accounts.authentication.EmailAuthBackend',
-]
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY='308669637476-ho5mq61gul69hl4sj637mkhuqjudg3ei.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET='-y1OqB5HmxJqjFozyMz3FTMB'
@@ -81,6 +77,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'social.wsgi.application'
+
+
 
 
 # Database

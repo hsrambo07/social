@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<br><br>
+{% for feed in feeds.all %}
+   <div class="container">
+      <div class="row">
+      <div class="col-lg-4 mb-4">
+      <div class="card">
+        <img src="{{feed.image.url}}" alt="" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">{{feed.user}}</h5>
+          <p class="card-text">{{feed.post_body}}</p>
+          {{feed.post_date}}
+         <a href="http://127.0.0.1:8000/feed/create/{{feed.id}}/none/" class="btn btn-outline-success btn-sm">Read More</a>
+          <a href="" class="btn btn-outline-danger btn-sm"><i class="far fa-heart"></i></a>
+        </div>
+       </div>
+      </div>
+    </div>
+</div>
+<br>
+<br>
+  {% endfor %}      
+
+
+{% endblock %}

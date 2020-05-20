@@ -10,7 +10,7 @@ from django.views.generic import FormView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from feed.forms import UpdateFeedForm
-    
+from django.views .decorators.http import require_POST    
 
 @login_required
 def post_create(request):
@@ -34,6 +34,7 @@ def post_create(request):
     return render(request,'feed.html',{'form':form})
 
 
+@login_required
 
 def post_detail(request,id,slug):
     model = UserPost
@@ -42,3 +43,27 @@ def post_detail(request,id,slug):
     image=get_object_or_404(UserPost,id=id,slug=slug)
     
     return render(request,'post.html',{'section':'images','post':image,'images':images})
+
+@login_required
+@require_POST
+def image_like(request):
+    image_id=request.POST.get('id')
+    action=request.POST.get('action')
+    if image_id and action:
+        try:
+            image=Image.objects.get(id=image_id)
+            if action=="like":
+                image.users_like.add(request.user)
+            else:
+                image.users_like.remove(request.user)
+            return JsonResponse({'status':'ok'})
+        except:
+            pass
+    return JsonResponse({'status':'ok'})                
+
+
+@login_required
+
+def allfeed(request):
+    feeds=UserPost.objects
+    return render(request,'allfeed.html',{'feeds':feeds})

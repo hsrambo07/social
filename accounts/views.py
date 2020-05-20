@@ -28,13 +28,13 @@ def signup(request):
 
                 except User.DoesNotExist:
                     user= User.objects.create_user(username=request.POST['username'],password=request.POST['password1'],email=request.POST['email'])
-                  
+                    userprofile = Profile.objects.create(user=user)
                     user.first_name =request.POST['first_name']
                     user.last_name =request.POST['last_name']
                     user.save()
                     auth.login(request,user)
-                    return redirect('edit')
-            
+                    response=redirect('edit')
+                    return response
         else:
             return render(request,'register/signup.html',{'error':'Password dosent match'})
     else:
@@ -69,7 +69,7 @@ def change_password(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
-            return redirect('change_password')
+            redirect('change_password')
         else:
             messages.error(request, 'Please correct the error below.')
     else:
@@ -79,6 +79,7 @@ def change_password(request):
     })    
 
 
+@login_required
 
 def edit(request):
     if request.method == 'POST':
@@ -92,7 +93,8 @@ def edit(request):
             user_form.save()
             profile_form.save()
             messages.success(request,'Profile Updated Successfully')
-            redirect('view_profile')
+            response=redirect('view_profile')
+            return response
         else:
             messages.error(request,'Error Updating your profile')
 
