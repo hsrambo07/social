@@ -7,6 +7,12 @@ Profile
 {% endblock %}
 
 {% block content %}
+{% load static %}
+
+
+
+
+
 
 <div class="container">
     <h1>Profile</h1>
@@ -20,11 +26,9 @@ Profile
     {% if user.profile.image.url %}
     <img src="{{ user.profile.image.url}}" width="240">
     {% else %}
-    <img src="{{ user.profile.image.url}}" width="240">
+    <img src="{% static 'image/comment.jpg' %}" width="240">
 
     {% endif %}
     <p><a href="{% url 'edit' %}">Edit Your profile</a></p>
-
 </div>
-{{userprofile.bio}}
 {% endblock %}

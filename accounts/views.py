@@ -16,7 +16,6 @@ from accounts.forms import UpdateProfileForm,UserEditForm,ProfileEditForm
 
 
 
-
 def signup(request):
     model=User
     if request.method=='POST':
@@ -34,7 +33,7 @@ def signup(request):
                     user.last_name =request.POST['last_name']
                     user.save()
                     auth.login(request,user)
-                    return redirect('home')
+                    return redirect('edit')
             
         else:
             return render(request,'register/signup.html',{'error':'Password dosent match'})
@@ -46,9 +45,9 @@ def login(request):
         user=auth.authenticate(username=request.POST['username'],password=request.POST['password1'])
         if user is not None:
             auth.login(request,user)
-            return redirect('home')
+            return redirect('edit')
         else:
-            return render(request,'registration/login.html',{'error':'username or password is inccorrect'})
+            return render(request,'registeration/login.html',{'error':'username or password is incorrect'})
     else:
         return render(request,'registration/login.html')
 
@@ -62,7 +61,7 @@ def logout(request):
     return render(request,'register/logout.html')
 
 
-
+@login_required
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -81,7 +80,6 @@ def change_password(request):
 
 
 
-@login_required
 def edit(request):
     if request.method == 'POST':
         user_form=UserEditForm(instance=request.user,data=request.POST)
@@ -93,9 +91,19 @@ def edit(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
+            messages.success(request,'Profile Updated Successfully')
+            redirect('view_profile')
+        else:
+            messages.error(request,'Error Updating your profile')
+
+    
     else:
+        profile = Profile(user=request.user)
+
         user_form=UserEditForm(instance=request.user)
         profile_form=ProfileEditForm(instance=request.user.profile)
+        
+
     return render(request,'accounts/edit.html',{'user_form':user_form,'profile_form':profile_form})    
 
 
@@ -108,4 +116,3 @@ def view_profile(request, pk=None):
         users = request.user
     product = {'users': users,'name':request.user.first_name}
     return render(request, 'accounts/profile.html', product)
-

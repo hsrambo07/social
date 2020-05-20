@@ -2,6 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+    <meta name="google-site-verification" content="SmZ1lnEVZPLDTkxzbS5Xv1jAkz3bsoA2YPnDJXIXJ1I" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5">
     <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/lib/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/lib/font-awesome.min.css">
@@ -36,7 +37,7 @@
                     </ul>
                 </div>
                 {% if user.is_authenticated %}  
-                <a href="{% url 'signup' %}" style="color: yellow; font-size: 25px; font-weight: bolder; margin-right: 30px;" class="title">{{request.user.username}}</a>
+                <a href="{% url 'view_profile' %}" style="color: yellow; font-size: 25px; font-weight: bolder; margin-right: 30px;" class="title">{{request.user.username}}</a>
 
                 <li><a href="{% url 'change_password' %}" style="color: chartreuse;">Change_Password</a></li>
                 <li><a href="{% url 'edit' %}" style="color: chartreuse;">Edit profile</a></li>
