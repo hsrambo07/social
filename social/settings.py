@@ -1,5 +1,5 @@
 import os
-
+from django.urls import reverse_lazy
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -51,7 +51,9 @@ MIDDLEWARE = [
 LOGIN_REDIRECT_URL = 'view_profile'
 
 
-
+ABSOLUTE_URL_OVERRIDES={
+    'auth.user': lambda u: reverse_lazy('user_detail',args=[u.username])
+}
 
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY='308669637476-ho5mq61gul69hl4sj637mkhuqjudg3ei.apps.googleusercontent.com'

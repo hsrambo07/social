@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block title %}People{% endblock %}
+
+{% block content  %}
+
+<h1>
+    People you may know
+</h1>
+<div id="people-list">
+    {% for user in users %}
+    <div class="user">
+        <a href="{{user.get_absolute_url}}">
+        
+       <img src="{{ user.profile.image.url}}" alt="Avatar" style="width:80px;
+       height:80px;
+       object-fit:cover;
+       border-radius:50%;">
+    
+        </a>
+        <div class="info">
+        <a href="{{user.get_absolute_url}}" class="title">
+            {{user.get_full_name}}
+        </a>    
+        </div>
+        </div>
+{% endfor %}
+    </div>
+{% endblock %}

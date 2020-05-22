@@ -2,34 +2,39 @@
 <br><br><br><br>
 {% block content %}
 {% load static %}
-<p style="display: inline-block; margin-bottom: 20px;">{{post.post_body}}</p>
-
-<p>{{post.post_date}}</p>
 
 <div class="container">
 
     <div class="jumbotron">
-
    
+        <img src="{{ user.profile.image.url}}" alt="Avatar" style="width:80px;
+        height:80px;
+        object-fit:cover;
+        border-radius:50%;">  <h5 style="display: inline-block;" class="card-title">{{post.user}}</h5>
+<br>
 {% if post.image.url %}
 {% load thumbnail %}
 {% thumbnail post.image "300" as im %}
 <img src="{{im.url}}" calss="image-detail">
+<p style="display: inline-block; margin-bottom: 20px;">{{post.post_body}}</p>
+
+
+
 {% endthumbnail %}
 {% else %}
 <img src="{% static 'image/comment.jpg' %}" width="240">
 {% endif %}
 </form>
 
-{% with total_likes=post.users_like.count %}
-<div class="image-info">
+{% with total_likes=post.users_like.count users_like=post.users_like.all %}
+<div class="post-info">
 
-    <div>
-        <span class="count">
-            {{total_likes}}like{{total_likes|pluralize}}
+    <div><span class="count">
+        <span class="total">
+            {{total_likes}}</span>Like{{total_likes|pluralize}}
         </span>
-        <a href="#" data-id="{{post.id}}" data-action="{% if request.uer in users_like  %}un{% endif %}like"
-        class="like-button">
+        <a href="#" data-id="{{post.id}}" data-action="{% if request.user in users_like  %}un{% endif %}like"
+        class="like button">
     {% if request.user not in users_like %}
     Like
     {% else %}
@@ -50,43 +55,33 @@ Nobody liked the image yet
 {% endfor %}
 {% endwith %}
 <br>
-
-
+<p>{{post.post_date}}</p>
+{{post.id}}
 </div>
 </div>
 
-    <script>
-        var csrftoken=Cookie.get('csrftoken');
-        function csrfSafeMethod(method){
-            //following dont require CSRF protection
-            return (/^(GET|HEAD|OPTIONS|TRACE)$/.).test(method);
-        }
-        $.ajaxSetup({
-            beforeSend: function(xhr,settings){
-                if (!csrfSafeMethod(settings.type)&& !this.crossDomain){
-                    xhr.setRequestHeader("X-CSRFToken",csrftoken);
-                }
-            }
-    
-    
-        });
+
+{% endblock %}
+
+    {% block domready %}
         
-        $(document).ready(function(){
-            $.('a.like').click(function(e){
+            $('a.like').click(function(e){
         e.preventDefault();
-        $.post('{% url "images:like" %}',{
+        $.post('{% url "feed:like" %}',
+        {
 
             id: $(this).data('id'),
             action: $(this).data('action')
         },
         function(data){
-        if (data['status']=='ok'){
+        if (data['status']=='ok')
+        {
             var previous_action=$('a.like').data('action');
 
             $('a.like').data('action',previous_action=='like' ?
             'unlike':'like');
 
-            $('a.like').text(previous_action='like' ? 'unlike' : 'Like');
+            $('a.like').text(previous_action=='like' ? 'Unlike' : 'Like');
 
             var previous_likes=parseInt($('span.count.total').text());
             $('span.count.total').text(previous_action=='like'?
@@ -94,11 +89,11 @@ Nobody liked the image yet
             
         }    
         }
-    }
-    });
+            
+    );
         });
     
     
-    </script>    
-
 {% endblock %}
+
+        

@@ -13,8 +13,9 @@ from django.views.generic import UpdateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from accounts.forms import UpdateProfileForm,UserEditForm,ProfileEditForm
-
-
+from feed.models import UserPost
+from django.views .decorators.http import require_POST   
+from django.http import JsonResponse
 
 def signup(request):
     model=User
@@ -114,7 +115,38 @@ def edit(request):
 def view_profile(request, pk=None):
     if pk:
         users= get_object_or_404(Profile, pk=pk)
+        
     else:
         users = request.user
-    product = {'users': users,'name':request.user.first_name}
+    uploads=UserPost.objects.filter(user=request.user)
+    product = {'users': users,'name':request.user.first_name,'content':uploads}
     return render(request, 'accounts/profile.html', product)
+
+@login_required
+def user_list(request):
+    users=User.objects.filter(is_active=True)
+    return render(request,'accounts/list.html',{'section':'people','users':users})
+
+@login_required
+def user_detail(request,username):
+    user=get_object_or_404(User,username=username,is_active=True)
+    upload=UserPost.objects.filter(user=user.id)
+
+    return render(request,'accounts/detail.html',{'section':'people','user':user,'content':upload})
+
+@require_POST
+@login_required
+def user_follow(request):
+    user_id =request.POST.get('id')
+    action=request.POST.get('action')
+    if user_id and action:
+        try:
+            user= User.objects.get(id=user_id)
+            if action=='follow':
+                Contact.objects.get_or_create(user_from=request.user,user_to=user)
+            else:
+                Contact.objects.filter(user_from=request.user,user_to=user).delete()
+            return JsonResponse({'status':'ok'})
+        except User.DoesNotExist:
+            return JsonResponse({'status':'ko'})
+    return JsonResponse({'status':'ko'})        

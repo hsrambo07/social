@@ -31,4 +31,21 @@ Profile
     {% endif %}
     <p><a href="{% url 'edit' %}">Edit Your profile</a></p>
 </div>
+
+
+<div class="container">
+<div class="row-sm">
+    <div class="jumbotron">
+        <h1>My Uploads</h1>
+        {% for data in content %}
+        
+        <img src="{{data.image.url}}" style="width:180px; height: 180px">
+        <p>{{data.post_body}}</p>
+        <p>{{data.user_likes}}likes</p>
+        <p>{{data.post_date}}</p>
+
+{% endfor %}
+    </div>
+</div>
+</div>
 {% endblock %}

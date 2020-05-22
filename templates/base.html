@@ -9,15 +9,8 @@
     <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/lib/animations.min.css">
     <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/responsive.css">
-    <script src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/js/lib/jquery.js"></script>
-    <script src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/js/lib/owl.carousel.min.js"></script>
-    <script>
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-		})(window,document,'script','dataLayer','GTM-MT6DCKQ');
-    </script>
+   
+
 	 </head>
 <body data-rsssl=1>
 <div class="wrapper">
@@ -88,30 +81,29 @@
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js">
 
 </script>
+
 <script>
-    var csrftoken=Cookie.get('csrftoken');
-    function csrfSafeMethod(method){
-        //following dont require CSRF protection
-        return (/^(GET|HEAD|OPTIONS|TRACE)$/.).test(method);
-    }
-    $.ajaxSetup({
-        beforeSend: function(xhr,settings){
-            if (!csrfSafeMethod(settings.type)&& !this.crossDomain){
-                xhr.setRequestHeader("X-CSRFToken",csrftoken);
-            }
+
+var csrftoken=Cookies.get('csrftoken');
+        function csrfSafeMethod(method){
+            //following dont require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
         }
-
-
-    });
+        $.ajaxSetup({
+            beforeSend: function(xhr,settings){
+                if (!csrfSafeMethod(settings.type)&& !this.crossDomain){
+                    xhr.setRequestHeader("X-CSRFToken",csrftoken);
+                }
+            }
     
-    $(document).ready(function(){
-        {% block domready %}
-        {% endblock %}
-    });
+    
+        });
+        $(document).ready(function(){
+            {% block domready %}
+            {% endblock %}
 
-
+        });
 </script>
-
 </div>
 </body>
 </html>       
