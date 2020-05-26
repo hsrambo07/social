@@ -19,22 +19,31 @@
     <span class="total">{{total_followers}}</span>
     follower{{total_followers|pluralize}}
 </span>
-<a href="#" data-id="{{user.id}}" data-action="{% if reques.user in user.followers.all %}un{% endif %}follow" class="follow button">
+<a href="{% url 'user_follow' %}" data-id="{{user.id}}" data-action="{% if request.user in user.followers.all %}un{% endif %}follow" class="follow button">
 {% if request.user not in user.followers.all %}
 Follow
 {% else %}
 Unfollow
 {% endif  %}
 
+
+
+
+
+
+
+
+
 </a>
+<h2>Uploads</h2>
 <div id="image-list" class="class-image-container">
     {% for data in content %}
-        
+    <div class="jumbotron">    
     <img src="{{data.image.url}}" style="width:180px; height: 180px">
     <p>{{data.post_body}}</p>
     <p>{{data.user_likes}}likes</p>
     <p>{{data.post_date}}</p>
-
+</div>
 {% endfor %}
 
 </div>
@@ -46,9 +55,10 @@ Unfollow
 {% block domready %}
 $('a.follow').click(function(e){
     e.preventDefault();
-    $.post('{% url "user_follow" %}'{
-        id: $.(this).data('id'),
-        action: $.(this).data('action')
+    $.post('{% url "user_follow" %}',
+    {
+        id: $(this).data('id'),
+        action: $(this).data('action')
 
     },
     function(data){
@@ -71,3 +81,4 @@ $('a.follow').click(function(e){
     });
 });
 {% endblock %}
+

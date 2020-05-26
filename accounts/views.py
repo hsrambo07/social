@@ -16,6 +16,12 @@ from accounts.forms import UpdateProfileForm,UserEditForm,ProfileEditForm
 from feed.models import UserPost
 from django.views .decorators.http import require_POST   
 from django.http import JsonResponse
+from django.views import generic
+from common.decorators import ajax_required
+from django.http import HttpResponse
+from django.http import HttpResponseBadRequest
+
+
 
 def signup(request):
     model=User
@@ -134,6 +140,7 @@ def user_detail(request,username):
 
     return render(request,'accounts/detail.html',{'section':'people','user':user,'content':upload})
 
+@ajax_required
 @require_POST
 @login_required
 def user_follow(request):
@@ -150,3 +157,21 @@ def user_follow(request):
         except User.DoesNotExist:
             return JsonResponse({'status':'ko'})
     return JsonResponse({'status':'ko'})        
+
+class UserFollow(generic.RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+
+        celeb = get_object_or_404(User, pk=pk)
+        url_ = celeb.get_absolute_url()
+
+        if self.request.user.is_authenticated:
+            if self.request.user in celeb.followers.all():
+                Contact.objects.filter(user_from=self.request.user,
+                                       user_to=celeb).delete()
+            else:
+                Contact.objects.get_or_create(user_from=self.request.user,
+                                              user_to=celeb)
+                create_action(self.request.user, 'is now following', celeb)
+        return url_
+
