@@ -67,5 +67,5 @@ def post_like(request):
 @login_required
 
 def allfeed(request):
-    feeds=UserPost.objects
+    feeds=UserPost.objects.all().order_by('-post_date')
     return render(request,'allfeed.html',{'feeds':feeds})
