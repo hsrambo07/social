@@ -45,18 +45,16 @@
     </div>
 <div class="image-likes">
 
-    {% for user in image.users_like.all %}
-</div>
-<img src="{{user.profile.image.url}}">
-<p>{{user.first_name}}</p>
-</div>
+    {% for user in post.users_like.all %}
+
 {% empty %}
 Nobody liked the image yet
 {% endfor %}
 {% endwith %}
 <br>
 <p>{{post.post_date}}</p>
-{{post.id}}
+</div>
+</div>
 </div>
 </div>
 
@@ -73,6 +71,8 @@ Nobody liked the image yet
             id: $(this).data('id'),
             action: $(this).data('action')
         },
+    
+ 
         function(data){
         if (data['status']=='ok')
         {
@@ -83,8 +83,8 @@ Nobody liked the image yet
 
             $('a.like').text(previous_action=='like' ? 'Unlike' : 'Like');
 
-            var previous_likes=parseInt($('span.count.total').text());
-            $('span.count.total').text(previous_action=='like'?
+            var previous_likes=parseInt($('span.count .total').text());
+            $('span.count .total').text(previous_action=='like'?
             previous_likes +1 : previous_likes -1);
             
         }    
@@ -95,5 +95,8 @@ Nobody liked the image yet
     
     
 {% endblock %}
+
+
+
 
         

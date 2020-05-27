@@ -5,9 +5,11 @@
   <h1>Latet Post</h1>
 
 {% for feed in feeds.all %}
-      <div class="row">
+<div class="container">
+      
+<div class="row">
       <div class="col-lg-4 mb-4">
-      <div class="card">
+      <div class="card jumbotron">
         <img src="{{feed.image.url}}" alt="" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">{{feed.user}}</h5>
@@ -22,6 +24,7 @@
 </div>
 <br>
 <br>
+</div>
   {% endfor %}      
 
 

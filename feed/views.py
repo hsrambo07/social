@@ -53,7 +53,7 @@ def post_like(request):
     action=request.POST.get('action')
     if post_id and action:
         try:
-            post=UserPost.objects.get(id=image_id)
+            post=UserPost.objects.get(id=post_id)
             if action=="like":
                 post.users_like.add(request.user)
             else:
