@@ -31,7 +31,7 @@ class Contact(models.Model):
         ordering=('-created',)
 
     def __str__(self):
-        return '{} follows {}'.format(self.user_form,self.user_to)
+        return '{} follows {}'.format(self.user_form,self.users_to)
     
 following =models.ManyToManyField('self',through=Contact,related_name='followers',symmetrical=False)
 

@@ -19,6 +19,7 @@ ALLOWED_HOSTS = ['google-site-verification=Rt0EgqfQL3UirQO9H3VF7pdebdr-iv5vOf29c
 # Application definition
 
 INSTALLED_APPS = [
+    'communications',
     'feed.apps.FeedConfig',
     'social_django',
     'sorl.thumbnail',

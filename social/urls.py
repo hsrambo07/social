@@ -12,6 +12,8 @@ urlpatterns = [
     path('feed/',include(('feed.urls','feed'), namespace='images')),
     path('',views.home,name='home'),
     path('about/',views.about,name='about'),
+    path('messages/', include('communications.urls')),
+
 ] 
 urlpatterns +=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

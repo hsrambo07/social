@@ -137,14 +137,13 @@ def user_list(request):
 def user_detail(request,username):
     user=get_object_or_404(User,username=username,is_active=True)
     upload=UserPost.objects.filter(user=user.id)
-
     return render(request,'accounts/detail.html',{'section':'people','user':user,'content':upload})
 
 @ajax_required
-@require_POST
 @login_required
+@require_POST
 def user_follow(request):
-    user_id =request.POST.get('id')
+    user_id=request.POST.get('id')
     action=request.POST.get('action')
     if user_id and action:
         try:
@@ -154,9 +153,10 @@ def user_follow(request):
             else:
                 Contact.objects.filter(user_from=request.user,user_to=user).delete()
             return JsonResponse({'status':'ok'})
-        except User.DoesNotExist:
-            return JsonResponse({'status':'ko'})
-    return JsonResponse({'status':'ko'})        
+        except:
+            pass
+    return JsonResponse({'status':'ok'})        
+
 
 class UserFollow(generic.RedirectView):
     def get_redirect_url(self, *args, **kwargs):

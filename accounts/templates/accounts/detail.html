@@ -25,13 +25,7 @@ Follow
 {% else %}
 Unfollow
 {% endif  %}
-
-
-
-
-
-
-
+{{user.followers.all}}
 
 
 </a>
@@ -72,8 +66,8 @@ $('a.follow').click(function(e){
                 previous_action=='follow'?'Unfollow':'Follow');
 
                 var previous_followers=parseInt(
-                    $('span.count.total').text());
-                    $('span.count.total').text(previous_action=='follow' ? 
+                    $('span.count .total').text());
+                    $('span.count .total').text(previous_action=='follow' ? 
                     previous_followers +1 : previous_followers -1);
                 
             

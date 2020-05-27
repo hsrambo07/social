@@ -7,7 +7,8 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import reverse_lazy
-
+from django.contrib.auth import login, authenticate
+from django.contrib import auth
 
 urlpatterns = [
     path('signup',views.signup, name='signup'),
