@@ -7,15 +7,16 @@
 
     <div class="jumbotron">
    
-        <img src="{{ user.profile.image.url}}" alt="Avatar" style="width:80px;
+        <a href="{{user.get_absolute_url}}">   <img src="{{ user.profile.image.url}}" alt="Avatar" style="width:80px;
         height:80px;
         object-fit:cover;
-        border-radius:50%;">  <h5 style="display: inline-block;" class="card-title">{{post.user}}</h5>
+        border-radius:50%;"> </a> <a href="{{user.get_absolute_url}}"><h5 style="display: inline; margin-bottom: 20px;" >{{post.user}}</h5></a>
 <br>
 {% if post.image.url %}
 {% load thumbnail %}
 {% thumbnail post.image "300" as im %}
-<img src="{{im.url}}" calss="image-detail">
+<img src="{{im.url}}" class="image-detail">
+<br>
 <p style="display: inline-block; margin-bottom: 20px;">{{post.post_body}}</p>
 
 

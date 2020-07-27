@@ -5,12 +5,12 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/',include('accounts.urls')),
     path('feed/',include(('feed.urls','feed'), namespace='images')),
     path('',views.home,name='home'),
+    path('game/',views.game,name='game'),
     path('about/',views.about,name='about'),
     path('messages/', include('communications.urls')),
 

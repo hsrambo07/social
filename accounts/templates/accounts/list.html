@@ -4,27 +4,37 @@
 {% block title %}People{% endblock %}
 
 {% block content  %}
-
-<h1>
+<br>
+<div class="container">
+<h1 style="color: chartreuse;">
     People you may know
 </h1>
+<br>
 <div id="people-list">
     {% for user in users %}
+    <div class="card jumbotron">
+
     <div class="user">
         <a href="{{user.get_absolute_url}}">
         
-       <img src="{{ user.profile.image.url}}" alt="Avatar" style="width:80px;
-       height:80px;
+       <img src="{{ user.profile.image.url}}" alt="Avatar" style="width:120px;
+       height:120px;
        object-fit:cover;
-       border-radius:50%;">
+       border-radius:50%;
+       display: inline-block;">
     
         </a>
         <div class="info">
-        <a href="{{user.get_absolute_url}}" class="title">
+        <a href="{{user.get_absolute_url}}" 
+        style="display: inline; font-size: 30px;" class="title">
             {{user.get_full_name}}
         </a>    
         </div>
-        </div>
+    </div>
+    </div>
 {% endfor %}
     </div>
+    </div>
+    
+
 {% endblock %}

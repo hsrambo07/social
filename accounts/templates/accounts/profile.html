@@ -15,37 +15,54 @@ Profile
 
 
 <div class="container">
-    <h1>Profile</h1>
-    <p>Username: {{ user }}</p>
-    <p>First name: {{ request.user.first_name }}</p>
-    <p>Last name: {{ request.user.last_name}}</p>
-    <p>Email ID: {{ request.user.email}}</p>
-
-    <p>Description: {{ user.profile.bio }}</p>
-    <p>Website: {{ user.profile.url }}</p>
+    <h1 style="color:chartreuse">Profile</h1>
+    <br>
     {% if user.profile.image.url %}
-    <img src="{{ user.profile.image.url}}" width="240">
+    <img src="{{ user.profile.image.url}}" style="width:140px;
+    height:140px;
+    object-fit:cover;
+    border-radius:50%;"  width="200">
     {% else %}
-    <img src="{% static 'image/comment.jpg' %}" width="240">
+    <img src="{% static 'image/person-01.png' %}" style="width:140px;
+    height:140px;
+    object-fit:cover;
+    border-radius:50%;"  width="200">
 
     {% endif %}
-    <p><a href="{% url 'edit' %}">Edit Your profile</a></p>
-</div>
+<style>
+p{
+    color: darkcyan;
+    font-size: large;
+}    
+</style>
+    <p style="font-size: 20px;">Username: {{ user }}</p>
+    <p style="font-size: 20px;">First name: {{ request.user.first_name }}</p>
+    <p style="font-size: 20px;">Last name: {{ request.user.last_name}}</p>
+    <p style="font-size: 20px;">Email ID: {{ request.user.email}}</p>
 
+    <p style="font-size: 20px;">Description: {{ user.profile.bio }}</p>
+    <p style="font-size: 20px;">Website: {{ user.profile.url }}</p>
+   
+    <br>
+    <br>
+    <p style="font-size: 20px; color: cadetblue;"><a href="{% url 'edit' %}">Edit Your profile</a></p>
+</div>
+<br>
 
 <div class="container">
-<div class="row-sm">
-    <div class="jumbotron">
-        <h1>My Uploads</h1>
+        <h1 style="color: rgb(230, 46, 116);">My Uploads</h1>
+        <br>
         {% for data in content %}
+        <div class="card jumbotron">
         
         <img src="{{data.image.url}}" style="width:180px; height: 180px">
         <p>{{data.post_body}}</p>
-        <p>{{data.user_likes}}likes</p>
+        <p>{{data.user_likes.count.all}}likes</p>
         <p>{{data.post_date}}</p>
-
-{% endfor %}
+        <p>{{data.users_like.count}}Likes</p>
     </div>
+
+        {% endfor %}
 </div>
-</div>
+
 {% endblock %}

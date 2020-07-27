@@ -136,7 +136,7 @@ def user_list(request):
 @login_required
 def user_detail(request,username):
     user=get_object_or_404(User,username=username,is_active=True)
-    upload=UserPost.objects.filter(user=user.id)
+    upload=UserPost.objects.filter(user=user.id).order_by('-post_date')
     return render(request,'accounts/detail.html',{'section':'people','user':user,'content':upload})
 
 @ajax_required
@@ -153,8 +153,8 @@ def user_follow(request):
             else:
                 Contact.objects.filter(user_from=request.user,user_to=user).delete()
             return JsonResponse({'status':'ok'})
-        except:
-            pass
+        except User.DoesNotExist:
+            return JsonResponse({'status':'ok'})
     return JsonResponse({'status':'ok'})        
 
 

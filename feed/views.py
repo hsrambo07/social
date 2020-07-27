@@ -43,8 +43,8 @@ def post_detail(request,id,slug):
     images = UserPost(user=request.user)
     context_object_name = 'post'
     image=get_object_or_404(UserPost,id=id,slug=slug)
-    
-    return render(request,'post.html',{'section':'images','post':image,'images':images})
+    user = User.objects.all()
+    return render(request,'post.html',{'section':'images','post':image,'images':images,'user':user})
 
 @login_required
 @require_POST

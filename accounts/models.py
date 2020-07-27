@@ -9,7 +9,7 @@ class Profile(models.Model):
     image=models.ImageField(upload_to='images/',blank='True')
 
     bio=models.TextField()
-    url=models.TextField()
+    url=models.URLField()
     #gender = models.IntegerField(choices=GENDER_CHOICES, default=1)
     #phone= models.CharField(max_length=10, blank=True)
     def __str__(self):
@@ -17,7 +17,6 @@ class Profile(models.Model):
 
     def __unicode__(self):
         return u"%s" % self.user.username
-
 
 
 

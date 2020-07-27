@@ -19,47 +19,49 @@
 		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 		})(window,document,'script','dataLayer','GTM-MT6DCKQ');
     </script>
+    {% load static %}
 	 </head>
-<body data-rsssl=1>
-<div class="wrapper">
-    <header class="transparent" style="background-color:rgb(25, 142, 219)">
-        <div class="container" >
-            <div class="row" style="margin-bottom: 20px;">
-                <div class="col-md-2">
-                    <div class="logo"><a href="{% url 'home' %}"><img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/logo.svg" alt="logo"></a></div>
-                </div>
-                <div class="col-md-7">
-                    <ul class="menu">
-                        <li><a href="{% url 'home' %}">Home</a></li>
-                        <li><a href="{% url 'about' %}">About Us</a></li>
-                        <li><a href="http://127.0.0.1:8000/feed/allfeeds/">FEED</a></li>
-                        <li><a href="https://enginehosting-html.fruitfulcode.com/contact">Contact Us</a></li>
-                    </ul>
-                </div>
-                {% if user.is_authenticated %}  
-                <a href="{% url 'view_profile' %}" style="color: yellow; font-size: 25px; font-weight: bolder; margin-right: 30px;" class="title">{{request.user.username}}</a>
-
-                <li><a href="{% url 'change_password' %}" style="color: chartreuse;">Change_Password</a></li>
-                <li><a href="{% url 'edit' %}" style="color: chartreuse;">Edit profile</a></li>
-                
-            <div class="button-header">
-                <a class="custom-btn" href="javascript:{document.getElementById('logout').submit()}">Logout</a>
-                <form id="logout" method="POST" action="{% url 'logout1' %}">
-                    {% csrf_token %}
-                    <input type="hidden">
-                  </form>
-            </div>
-        </div>
-        {% else %}
-                <div class="col-md-3">
+     <body data-rsssl=1>
+        <div class="wrapper">
+            <header class="transparent" style="background-color:rgb(25, 142, 219)">
+                <div class="container" >
+                    <div class="row" style="margin-bottom: 20px;">
+                        <div class="col-md-2">
+                            <div class="logo"><a href="{% url 'home' %}"><img style="width: 40px; height:40px;" src="{% static 'image/logo.png' %}" alt="logo"></a></div>
+                        </div>
+                        <div class="col-md-7">
+                            <ul class="menu">
+                                <li><a href="{% url 'game' %}">Play games</a></li>
+                                <li><a href="{% url 'feed:create' %}">Upload</a></li>
+                                <li><a href="{% url 'feed:feed' %}">FEED</a></li>
+                                <li><a href="{% url 'user_list' %}">Find people</a></li>
+        
+                            </ul>
+                        </div>
+                        {% if user.is_authenticated %}  
+        
+                        <a href="{% url 'view_profile' %}" style="color: yellow; font-size: 25px; font-weight: bolder; margin-right: 30px;" class="title">{{request.user.username}}</a>
+                        <li><a href="{% url 'change_password' %}" style="color: chartreuse;">Change_Password</a></li>
+                        <li><a href="{% url 'edit' %}" style="color: chartreuse;">Edit profile</a></li>
+                        
                     <div class="button-header">
-                        <a href="{% url 'login' %}" class="custom-btn login">Login</a>
-                        <a href="{% url 'signup' %}" class="custom-btn">Sign Up</a>
+                        <a class="custom-btn" href="javascript:{document.getElementById('logout').submit()}">Logout</a>
+                        <form id="logout" method="POST" action="{% url 'logout1' %}">
+                            {% csrf_token %}
+                            <input type="hidden">
+                          </form>
                     </div>
                 </div>
-                {% endif %}
-            </div>
-        </div>
+                {% else %}
+                        <div class="col-md-3">
+                            <div class="button-header">
+                                <a href="{% url 'login' %}" class="custom-btn login">Login</a>
+                                <a href="{% url 'signup' %}" class="custom-btn">Sign Up</a>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
 
 
 

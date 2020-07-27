@@ -13,7 +13,7 @@ SECRET_KEY = 'r*exkxvu_+gk003=s(9$j_zz4mz1tq8h=c8904m##g+=q+_0)r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['google-site-verification=Rt0EgqfQL3UirQO9H3VF7pdebdr-iv5vOf29cHrsPPA','https://127.0.0.1:8000','127.0.0.1','localhost']
+ALLOWED_HOSTS = ['google-site-verification=Rt0EgqfQL3UirQO9H3VF7pdebdr-iv5vOf29cHrsPPA','dfbc92a67f13.ngrok.io','https://127.0.0.1:8000','127.0.0.1','localhost']
 
 
 # Application definition
@@ -34,8 +34,8 @@ INSTALLED_APPS = [
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com' # mail service smtp
-EMAIL_HOST_USER = 'hs2002singhal@gmail.com' # email id
-EMAIL_HOST_PASSWORD = '9411013196' #password
+EMAIL_HOST_USER = 'xxxxxx@gmail.com' # email id
+EMAIL_HOST_PASSWORD = 'ur_pswd' #password
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 

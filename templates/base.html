@@ -10,32 +10,37 @@
     <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/responsive.css">
    
-
+{% load static %}
 	 </head>
-<body data-rsssl=1>
+<body data-rsssl=1 style="background: #1C1D24;">
 <div class="wrapper">
-    <header class="transparent" style="background-color:rgb(25, 142, 219)">
+    <header class="transparent" style="background-color:rgb(25, 142, 219); padding-top:10px ;">
         <div class="container" >
-            <div class="row" style="margin-bottom: 20px;">
+            <div class="row" style="margin-bottom: 10px;">
                 <div class="col-md-2">
-                    <div class="logo"><a href="{% url 'home' %}"><img src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/images/logo.svg" alt="logo"></a></div>
+                    <div class="logo"><a href="{% url 'home' %}"><img style="width: 80px; height: 80px;" src="{% static 'image/logo.png' %}" alt="logo"></a></div>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-10">
                     <ul class="menu">
-                        <li><a href="{% url 'home' %}">Home</a></li>
-                        <li><a href="http://127.0.0.1:8000/feed/create/">Upload</a></li>
-                        <li><a href="http://127.0.0.1:8000/feed/allfeeds/">FEED</a></li>
+                        <li><a href="{% url 'game' %}">Play games</a></li>
+                        <li><a href="{% url 'feed:create' %}">Upload</a></li>
+                        <li><a href="{% url 'feed:feed' %}">FEED</a></li>
                         <li><a href="{% url 'user_list' %}">Find people</a></li>
 
                     </ul>
                 </div>
                 {% if user.is_authenticated %}  
-
-                <a href="{% url 'view_profile' %}" style="color: yellow; font-size: 25px; font-weight: bolder; margin-right: 30px;" class="title">{{request.user.username}}</a>
-                <li><a href="{% url 'change_password' %}" style="color: chartreuse;">Change_Password</a></li>
-                <li><a href="{% url 'edit' %}" style="color: chartreuse;">Edit profile</a></li>
                 
-            <div class="button-header">
+                <div class="col-md-8" style="margin-right: 0px;">
+                    <ul class="menu" style="margin-right: 0px;">
+
+                        <li><a class="title" href="{% url 'change_password' %}" style="color: chartreuse; margin-right:0px;">Change_Password</a></li>
+                <li><a href="{% url 'edit' %}" class="title" style="color: chartreuse; margin-right:0px;">Edit profile</a></li>
+                <li><a href="{% url 'view_profile' %}" style="color: yellow; margin-right: 0px;" class="title">{{request.user.username}}</a></li>
+
+            </ul>
+        </div>
+            <div class="button-header" style="padding-left: 80px;">
                 <a class="custom-btn" href="javascript:{document.getElementById('logout').submit()}">Logout</a>
                 <form id="logout" method="POST" action="{% url 'logout1' %}">
                     {% csrf_token %}
@@ -72,7 +77,7 @@
  
  
 </div>
-<br<br><br><br><br><br><br><br><br>
+<br<br><br><br><br><br><br><br><br><br>
 <div style="display: block;">
     {% block content %}
 
@@ -106,6 +111,8 @@ var csrftoken=Cookies.get('csrftoken');
 
         });
 </script>
+
+
 </div>
 </body>
 </html>       

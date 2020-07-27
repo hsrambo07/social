@@ -1,0 +1,110 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="google-site-verification" content="SmZ1lnEVZPLDTkxzbS5Xv1jAkz3bsoA2YPnDJXIXJ1I" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5">
+    <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/lib/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/lib/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/lib/animations.min.css">
+    <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/css/responsive.css">
+    <script src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/js/lib/jquery.js"></script>
+    <script src="https://enginehosting-html.fruitfulcode.com/wp-content/themes/enginehosting-html/assets/js/lib/owl.carousel.min.js"></script>
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-MT6DCKQ');
+    </script>
+    
+{% load static %}
+</head>
+     <body>
+         <div style="display: block;">
+        <div class="wrapper">
+            <header class="transparent" style="  background: #1C1D24;
+            ">
+                <div class="container" >
+                    <div class="row" style="margin-bottom: 20px;">
+                        <div class="col-md-2">
+                            <div class="logo"><a href="{% url 'home' %}"><img src="{% static 'image/logo.png' %}" alt="logo"></a></div>
+                        </div>
+                        <div class="col-md-7">
+                            <ul class="menu">
+                                <li><a href="{% url 'game' %}">Play games</a></li>
+                                <li><a href="{% url 'feed:create' %}">Upload</a></li>
+                                <li><a href="{% url 'feed:feed' %}">FEED</a></li>
+                                <li><a href="{% url 'user_list' %}">Find people</a></li>
+        
+                            </ul>
+                        </div>
+                        {% if user.is_authenticated %}  
+        
+                        <a href="{% url 'view_profile' %}" style="color: yellow; font-size: 25px; font-weight: bolder; margin-right: 30px;" class="title">{{request.user.username}}</a>
+                        <li><a href="{% url 'change_password' %}" style="color: chartreuse;">Change_Password</a></li>
+                        <li><a href="{% url 'edit' %}" style="color: chartreuse;">Edit profile</a></li>
+                        
+                    <div class="button-header">
+                        <a class="custom-btn" href="javascript:{document.getElementById('logout').submit()}">Logout</a>
+                        <form id="logout" method="POST" action="{% url 'logout1' %}">
+                            {% csrf_token %}
+                            <input type="hidden">
+                          </form>
+                    </div>
+                </div>
+                {% else %}
+                        <div class="col-md-3">
+                            <div class="button-header">
+                                <a href="{% url 'login' %}" class="custom-btn login">Login</a>
+                                <a href="{% url 'signup' %}" class="custom-btn">Sign Up</a>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+
+
+ </header>
+    
+</div>
+
+    {% load static %}
+    <script src="{% static 'js/game.js' %}" type="text/javascript"></script>
+  
+    
+<br><br><br>    
+
+<br><br><br>    
+
+<br><br><br>    
+
+<br><br><br>    
+
+<style>
+ 
+
+body {
+    display:block ;
+  align-items: center;
+  justify-content: center;
+  background: #1C1D24;
+  align-items: center;
+ 
+}
+
+canvas {
+  border: 5px solid #272e38;
+}
+    </style>
+    <div class="container">
+<div style="align-items: center;" class="item">
+        <canvas id="canvas" width="400" height="400"></canvas>
+        <h3 style="color: aqua;font-size: 15px;">Press arrow keys to start the game</h3>
+
+    </div></div>
+</body>
+</html>

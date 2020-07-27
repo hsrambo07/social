@@ -10,6 +10,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
 from django.contrib import auth
 
+
 urlpatterns = [
     path('signup',views.signup, name='signup'),
     path('login',views.login, name='login'),
